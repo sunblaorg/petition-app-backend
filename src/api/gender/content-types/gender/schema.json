@@ -4,25 +4,30 @@
   "info": {
     "singularName": "gender",
     "pluralName": "genders",
-    "displayName": "gender"
+    "displayName": "gender",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "type": {
+    "arType": {
       "type": "string"
     },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "enType": {
+      "type": "string"
     }
   }
 }

@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "petitions",
+  "info": {
+    "singularName": "petition",
+    "pluralName": "petitions",
+    "displayName": "petition"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hideName": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "governorate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::governorate.governorate"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    }
+  }
+}
