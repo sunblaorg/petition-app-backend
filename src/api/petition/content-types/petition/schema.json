@@ -16,7 +16,7 @@
       "type": "boolean"
     },
     "description": {
-      "type": "string"
+      "type": "text"
     },
     "title": {
       "type": "string"
@@ -45,7 +45,7 @@
       "relation": "oneToOne",
       "target": "api::category.category"
     },
-    "started_by": {
+    "creator": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
