@@ -4,7 +4,8 @@
   "info": {
     "singularName": "app-info",
     "pluralName": "app-infos",
-    "displayName": "AppInfo"
+    "displayName": "AppInfo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +19,15 @@
       "type": "text"
     },
     "phone": {
+      "type": "string"
+    },
+    "facebookLink": {
+      "type": "string"
+    },
+    "instagramLink": {
+      "type": "string"
+    },
+    "WebsiteLink": {
       "type": "string"
     }
   }

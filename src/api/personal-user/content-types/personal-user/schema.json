@@ -4,7 +4,8 @@
   "info": {
     "singularName": "personal-user",
     "pluralName": "personal-users",
-    "displayName": "PersonalUser"
+    "displayName": "PersonalUser",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -29,6 +30,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::governorate.governorate"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }
