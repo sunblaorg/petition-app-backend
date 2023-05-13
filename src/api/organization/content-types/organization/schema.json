@@ -60,7 +60,7 @@
       "relation": "oneToOne",
       "target": "api::governorate.governorate"
     },
-    "user": {
+    "owner": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"

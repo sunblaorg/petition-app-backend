@@ -95,6 +95,12 @@
     },
     "websiteLink": {
       "type": "string"
+    },
+    "signedPetitions": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::petition.petition",
+      "mappedBy": "signers"
     }
   }
 }
