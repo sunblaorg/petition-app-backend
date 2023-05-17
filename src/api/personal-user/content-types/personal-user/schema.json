@@ -18,9 +18,6 @@
     "birthdateYear": {
       "type": "string"
     },
-    "phone": {
-      "type": "string"
-    },
     "gender": {
       "type": "relation",
       "relation": "oneToOne",
