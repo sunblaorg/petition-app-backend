@@ -21,9 +21,6 @@
     "title": {
       "type": "string"
     },
-    "published": {
-      "type": "boolean"
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -55,6 +52,12 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "signedPetitions"
+    },
+    "petition_stat": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::petition-stat.petition-stat",
+      "inversedBy": "petition"
     }
   }
 }

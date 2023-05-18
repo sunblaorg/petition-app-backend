@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "petition_stats",
+  "info": {
+    "singularName": "petition-stat",
+    "pluralName": "petition-stats",
+    "displayName": "petitionStat"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "views": {
+      "type": "biginteger"
+    },
+    "shares": {
+      "type": "biginteger"
+    },
+    "petition": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::petition.petition",
+      "mappedBy": "petition_stat"
+    }
+  }
+}
