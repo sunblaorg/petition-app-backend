@@ -101,6 +101,12 @@
       "relation": "manyToMany",
       "target": "api::petition.petition",
       "mappedBy": "signers"
+    },
+    "enName": {
+      "type": "string"
+    },
+    "arName": {
+      "type": "string"
     }
   }
 }
