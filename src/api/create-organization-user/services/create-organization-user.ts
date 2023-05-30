@@ -1,3 +1,5 @@
+import utils from "@strapi/utils";
+const { ApplicationError } = utils.errors;
 interface CreatePersonalUser {
   lat: number;
   long: number;
@@ -39,48 +41,53 @@ module.exports = {
       permitImage,
       ip,
     } = payload;
-    try {
-      const user = await strapi.plugins["users-permissions"].services.user.add({
-        username: ceoPhone,
-        email: `${ceoPhone}@petition.com`,
-        role: 2, // public
-        isPrivileged: false,
-        phoneVerified: false,
-        phoneNumber: ceoPhone,
-        userType: "organization",
-        lat: lat,
-        long: long,
-        arName: arName,
-        enName: enName,
-        image: logo,
-        ip: ip,
-      });
 
-      const { id } = user;
-      const organization = await strapi.entityService.create(
-        "api::organization.organization",
-        {
-          data: {
-            nearestLandmark,
-            CEOName,
-            organizationPhone,
-            facebookLink,
-            instagramLink,
-            websiteLink,
-            governorate,
-            permitImage,
-            permitNumber,
-            owner: id,
-            arName,
-            enName,
-            logo,
-          },
-          populate: "*",
-        }
-      );
-      return organization;
-    } catch (err) {
-      return err;
+    const users = await strapi.db
+      .query("plugin::users-permissions.user")
+      .findMany({ where: { ipAddress: ip } });
+
+    if (users?.length > 2) {
+      throw new ApplicationError("Multiple requests from same ip address");
     }
+
+    const user = await strapi.plugins["users-permissions"].services.user.add({
+      username: ceoPhone,
+      email: `${ceoPhone}@petition.com`,
+      role: 2, // public
+      isPrivileged: false,
+      phoneVerified: false,
+      phoneNumber: ceoPhone,
+      userType: "organization",
+      lat: lat,
+      long: long,
+      arName: arName,
+      enName: enName,
+      image: logo,
+      ipAddress: ip,
+    });
+
+    const { id } = user;
+    const organization = await strapi.entityService.create(
+      "api::organization.organization",
+      {
+        data: {
+          nearestLandmark,
+          CEOName,
+          organizationPhone,
+          facebookLink,
+          instagramLink,
+          websiteLink,
+          governorate,
+          permitImage,
+          permitNumber,
+          owner: id,
+          arName,
+          enName,
+          logo,
+        },
+        populate: "*",
+      }
+    );
+    return organization;
   },
 };
