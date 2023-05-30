@@ -6,6 +6,7 @@ interface CreatePersonalUser {
   name: string;
   birthdateYear: string;
   gender: number;
+  governorate: number;
 }
 
 module.exports = {
@@ -16,13 +17,15 @@ module.exports = {
       const user = await strapi.plugins["users-permissions"].services.user.add({
         username: phoneNumber,
         email: `${phoneNumber}@petition.com`,
-        role: 2,
+        role: 2, // public
         isPrivileged: false,
         phoneVerified: false,
         phoneNumber: phoneNumber,
-        userType: userType,
+        userType: "personal",
         lat: lat,
         long: long,
+        arName: name,
+        enName: name,
       });
 
       const { id } = user;

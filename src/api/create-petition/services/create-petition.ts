@@ -3,15 +3,22 @@ interface CreatePetition {
   governorate: number;
   category: number;
   hideName: boolean;
-  image?: string;
+  image?: number;
   creator: number;
   description: string;
 }
 
 module.exports = {
   createPetition: async (payload: CreatePetition) => {
-    const { title, governorate, category, hideName, creator, description } =
-      payload;
+    const {
+      title,
+      governorate,
+      category,
+      hideName,
+      creator,
+      description,
+      image,
+    } = payload;
     try {
       const petitionStat = await strapi.entityService.create(
         "api::petition-stat.petition-stat",
@@ -36,6 +43,7 @@ module.exports = {
             creator,
             description,
             petition_stat: petitionStatId,
+            image,
           },
           populate: "*",
         }
