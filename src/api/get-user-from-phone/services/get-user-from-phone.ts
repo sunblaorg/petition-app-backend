@@ -7,6 +7,7 @@ module.exports = {
       .query("plugin::users-permissions.user")
       .findOne({ where: { phoneNumber: phone } });
     if (user) {
+      strapi.service("api::get-user-from-phone.twilio").sendToWhatsapp(phone);
       if (user.userType === "personal") {
         const personalUser = await strapi
           .query("api::personal-user.personal-user")
