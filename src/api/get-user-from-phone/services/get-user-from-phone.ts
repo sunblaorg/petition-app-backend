@@ -2,12 +2,24 @@ import utils from "@strapi/utils";
 const { ApplicationError } = utils.errors;
 
 module.exports = {
-  getUserFromPhone: async (phone: string) => {
+  getUserFromPhone: async (phone: string, macAddress: string) => {
     const user = await strapi.db
       .query("plugin::users-permissions.user")
       .findOne({ where: { phoneNumber: phone } });
     if (user) {
-      strapi.service("api::get-user-from-phone.twilio").sendToWhatsapp(phone);
+      const verifiedUser = user?.macAddress === macAddress;
+      if (!user?.macAddress || !verifiedUser) {
+        strapi.service("api::get-user-from-phone.twilio").sendToWhatsapp(phone);
+        await strapi.entityService.update(
+          "plugin::users-permissions.user",
+          user.id,
+          {
+            data: {
+              macAddress: macAddress,
+            },
+          }
+        );
+      }
       if (user.userType === "personal") {
         const personalUser = await strapi
           .query("api::personal-user.personal-user")
@@ -15,7 +27,7 @@ module.exports = {
             where: { owner: user.id },
             populate: true,
           });
-        return personalUser;
+        return { ...personalUser, verifiedUser: verifiedUser };
       }
       if (user.userType === "organization") {
         const organizationUser = await strapi
@@ -24,9 +36,9 @@ module.exports = {
             where: { owner: user.id },
             populate: true,
           });
-        return organizationUser;
+        return { ...organizationUser, verifiedUser: verifiedUser };
       }
-      return user;
+      return { ...user, verifiedUser: verifiedUser };
     }
     throw new ApplicationError("User does not exist");
   },

@@ -121,6 +121,9 @@
     },
     "ipAddress": {
       "type": "string"
+    },
+    "macAddress": {
+      "type": "string"
     }
   }
 }
