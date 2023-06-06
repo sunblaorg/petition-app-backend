@@ -14,7 +14,16 @@ interface CreatePersonalUser {
 
 module.exports = {
   createPersonalUser: async (payload: CreatePersonalUser) => {
-    const { phoneNumber, lat, long, name, birthdateYear, gender, ip } = payload;
+    const {
+      phoneNumber,
+      lat,
+      long,
+      name,
+      birthdateYear,
+      gender,
+      ip,
+      governorate,
+    } = payload;
     const users = await strapi.db
       .query("plugin::users-permissions.user")
       .findMany({ where: { ipAddress: ip } });
@@ -45,6 +54,7 @@ module.exports = {
           birthdateYear: birthdateYear,
           gender: gender,
           owner: id,
+          governorate: governorate,
         },
         populate: "*",
       }
