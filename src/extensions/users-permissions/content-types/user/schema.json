@@ -124,6 +124,12 @@
     },
     "macAddress": {
       "type": "string"
+    },
+    "petition_stats": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::petition-stat.petition-stat",
+      "mappedBy": "viewers"
     }
   }
 }

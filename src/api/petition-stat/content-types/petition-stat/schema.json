@@ -4,7 +4,8 @@
   "info": {
     "singularName": "petition-stat",
     "pluralName": "petition-stats",
-    "displayName": "petitionStat"
+    "displayName": "petitionStat",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -22,6 +23,12 @@
       "relation": "oneToOne",
       "target": "api::petition.petition",
       "mappedBy": "petition_stat"
+    },
+    "viewers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "petition_stats"
     }
   }
 }
