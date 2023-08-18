@@ -130,6 +130,12 @@
       "relation": "manyToMany",
       "target": "api::petition-stat.petition-stat",
       "mappedBy": "viewers"
+    },
+    "content_reports": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::content-report.content-report",
+      "mappedBy": "user"
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "content_reports",
+  "info": {
+    "singularName": "content-report",
+    "pluralName": "content-reports",
+    "displayName": "contentReport",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "content_reports"
+    },
+    "petition": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::petition.petition",
+      "inversedBy": "content_reports"
+    }
+  }
+}

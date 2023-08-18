@@ -58,6 +58,12 @@
       "relation": "oneToOne",
       "target": "api::petition-stat.petition-stat",
       "inversedBy": "petition"
+    },
+    "content_reports": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::content-report.content-report",
+      "mappedBy": "petition"
     }
   }
 }
