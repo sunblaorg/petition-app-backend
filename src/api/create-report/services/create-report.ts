@@ -11,7 +11,7 @@ module.exports = {
         .query("api::personal-user.personal-user")
         .findOne({ where: { id: userId }, populate: true });
       const petition = await strapi
-        .query("api::petition.petition")
+        .query("api::personal-user.personal-user")
         .findOne({ where: { id: petitionId } });
 
       const report = await strapi.entityService.create(

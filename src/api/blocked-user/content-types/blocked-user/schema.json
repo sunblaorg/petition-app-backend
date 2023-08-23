@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blocked_users",
+  "info": {
+    "singularName": "blocked-user",
+    "pluralName": "blocked-users",
+    "displayName": "blockedUser",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "blocked_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "blocked_by": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
