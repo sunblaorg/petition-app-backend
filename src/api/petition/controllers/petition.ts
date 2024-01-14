@@ -13,17 +13,24 @@ export default factories.createCoreController(
       const results = await strapi
         .service("api::petition.petition")
         .findOne(ctx.params.id, sanitizedQueryParams);
-      const hideName = results.hideName;
-      const creator = results.creator;
-      const adjusted = {
-        ...results,
-        signers: results.signers.length,
-        updatedBy: null,
-        createdBy: null,
-        petition_stat: null,
-        content_reports: null,
-        creator: hideName ? "null" : "creator",
-      };
+      // const hideName = results.hideName;
+      // const creator = results.creator;
+      // const adjusted = {
+      //   ...results,
+      //   signers: results.signers.length,
+      //   updatedBy: null,
+      //   createdBy: null,
+      //   petition_stat: null,
+      //   content_reports: null,
+      //   creator: hideName ? "null" : "creator",
+      // };
+
+      const { creator, ...adjusted } = results;
+      adjusted.signers = results.signers.length;
+      adjusted.updatedBy = null;
+      adjusted.createdBy = null;
+      adjusted.petition_stat = null;
+      adjusted.content_reports = null;
 
       return adjusted;
     },
