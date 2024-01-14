@@ -13,7 +13,8 @@ export default factories.createCoreController(
       const results = await strapi
         .service("api::petition.petition")
         .findOne(ctx.params.id, sanitizedQueryParams);
-
+      const hideName = results.hideName;
+      const creator = results.creator;
       const adjusted = {
         ...results,
         signers: results.signers.length,
@@ -21,6 +22,7 @@ export default factories.createCoreController(
         createdBy: null,
         petition_stat: null,
         content_reports: null,
+        creator: hideName ? null : creator,
       };
 
       return adjusted;
