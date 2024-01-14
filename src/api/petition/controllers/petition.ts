@@ -25,14 +25,24 @@ export default factories.createCoreController(
       //   creator: hideName ? "null" : "creator",
       // };
 
-      const { creator, ...adjusted } = results;
-      adjusted.signers = results.signers.length;
-      adjusted.updatedBy = null;
-      adjusted.createdBy = null;
-      adjusted.petition_stat = null;
-      adjusted.content_reports = null;
-
-      return adjusted;
+      if (results.hideName === true) {
+        const { creator, ...adjusted } = results;
+        adjusted.signers = results.signers.length;
+        adjusted.updatedBy = null;
+        adjusted.createdBy = null;
+        adjusted.petition_stat = null;
+        adjusted.content_reports = null;
+        return adjusted;
+      } else {
+        const { ...adjusted } = results;
+        adjusted.signers = results.signers.length;
+        adjusted.creator = results.creator.username;
+        adjusted.updatedBy = null;
+        adjusted.createdBy = null;
+        adjusted.petition_stat = null;
+        adjusted.content_reports = null;
+        return adjusted;
+      }
     },
   })
 );
