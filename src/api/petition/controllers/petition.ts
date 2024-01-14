@@ -22,7 +22,7 @@ export default factories.createCoreController(
         createdBy: null,
         petition_stat: null,
         content_reports: null,
-        creator: hideName ? null : creator,
+        creator: hideName ? "null" : "creator",
       };
 
       return adjusted;
